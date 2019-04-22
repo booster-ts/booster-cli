@@ -3,13 +3,16 @@ import { Commands } from './Commands/Commands';
 import { PathHandler } from './PathHandler/PathHandler';
 import Creator from './Creator/Creator';
 import Generator from './Generator/Generator';
+import Config from './Config/Config';
 
 const container = new Injector();
 const path = container.inject(PathHandler);
 const command = container.inject(Commands);
 const creator = container.inject(Creator);
 const generator = container.inject(Generator);
+const config = container.inject(Config);
 
+config.handler();
 command.handler();
 
 const options = command.getOptions();
