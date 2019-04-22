@@ -35,7 +35,8 @@
         "object-literal-shorthand": true,
         "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
         "curly": [true, "as-needed"],
-        "ordered-imports": false
+        "ordered-imports": false,
+        "no-console": [false]
     },
     "rulesDirectory": []
 }

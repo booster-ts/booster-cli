@@ -36,6 +36,7 @@
     "tslint": "^5.16.0"
   },
   "dependencies": {
-    "@booster-ts/core": "0.0.1"
+    "@booster-ts/core": "0.0.1",
+    "commander": "^2.20.0"
   }
 }

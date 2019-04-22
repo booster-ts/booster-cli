@@ -2,6 +2,7 @@ import { booster } from '@booster-ts/core';
 import * as path from 'path';
 import * as fs from 'fs';
 
+@booster()
 export class PathHandler {
 
     /**
