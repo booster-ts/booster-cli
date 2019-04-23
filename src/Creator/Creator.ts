@@ -24,6 +24,9 @@ export default class Creator {
             `${this.pathHandler.getRootPath()}/ressources/tsconfig.json`, "./tsconfig.json"
         );
         fs.copyFileSync(`${this.pathHandler.getRootPath()}/ressources/app.ts`, "./src/app.ts");
+        fs.copyFileSync(
+            `${this.pathHandler.getRootPath()}/ressources/injector.ts`, "./src/injector.ts"
+        );
         this.updatePackage();
         process.chdir(currentPath);
     }
