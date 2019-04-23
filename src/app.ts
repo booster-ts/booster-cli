@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Injector } from '@booster-ts/core';
 import { Commands } from './Commands/Commands';
 import { PathHandler } from './PathHandler/PathHandler';
