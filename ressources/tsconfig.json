@@ -6,10 +6,6 @@
         "strict": false,
         "outDir": "dist",
         "sourceMap": true,
-        "types": [
-            "jest",
-            "node"
-        ]
     },
     "include": [
         "./src/"
