@@ -1,6 +1,6 @@
 {
-  "name": "booster-cli",
-  "version": "0.0.1",
+  "name": "@booster-ts/cli",
+  "version": "0.0.2",
   "description": "CLI for Booster-ts",
   "main": "dist/app.js",
   "scripts": {
