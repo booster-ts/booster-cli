@@ -25,6 +25,7 @@ export default class Generator {
                 let file = this.getTemplates(template);
                 const dest = this.config.getConfig().root;
                 file = file.replace(/__NAME__/g, fileName);
+                file = file.replace(/__SOURCE__/g, `${this.getInjectFile(dest, fileName)}`);
                 fs.mkdirSync(`${this.pathHandler.getProjectPath()}/${dest}/${fileName}`);
                 fs.writeFileSync(
                     `${this.pathHandler.getProjectPath()}/${dest}/${fileName}/${fileName}.ts`,
@@ -48,6 +49,11 @@ export default class Generator {
             // tslint:disable-next-line:no-empty
             } catch (e) { }
         return file;
+    }
+
+    private getInjectFile(dest, fileName) {
+        const base = path.join(this.pathHandler.getProjectPath(), this.config.getConfig().root);
+        return path.relative(`${this.pathHandler.getProjectPath()}/${dest}/${fileName}`, base);
     }
 
 }
