@@ -1,2 +1,3 @@
 # booster-cli
-Booster-ts CLI
+
+CLI for Booster Framework

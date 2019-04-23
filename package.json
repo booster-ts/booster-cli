@@ -1,0 +1,45 @@
+{
+  "name": "booster-cli",
+  "version": "0.0.1",
+  "description": "CLI for Booster-ts",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "jest -c ./tests/config.js",
+    "build": "tsc",
+    "lint": "tslint --project ./tsconfig.json -c ./tslint.json",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/booster-ts/booster-cli.git"
+  },
+  "bin": {
+    "boost": "./dist/app.js"
+  },
+  "keywords": [
+    "Booster",
+    "CLI",
+    "Framework",
+    "Dependency",
+    "Injection",
+    "DI",
+    "simple"
+  ],
+  "author": "ImOverlord",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/booster-ts/booster-cli/issues"
+  },
+  "homepage": "https://github.com/booster-ts/booster-cli#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.5",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0"
+  },
+  "dependencies": {
+    "@booster-ts/core": "0.0.1",
+    "commander": "^2.20.0"
+  }
+}
