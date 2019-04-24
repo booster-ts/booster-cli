@@ -12,6 +12,9 @@ jobs:
         - npm run test
         - npm run build
     - stage: npm beta release
+      branches:
+        only:
+        - edge
       script: npm run build
       deploy:
         provider: npm
@@ -22,6 +25,9 @@ jobs:
         on:
           branch: edge
     - stage: npm release
+      branches:
+        only:
+        - master
       script: npm run build
       deploy:
         provider: npm
