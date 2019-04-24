@@ -7,13 +7,12 @@ node_js:
 cache: npm
 install:
   - npm ci
+script:
+  - npm run lint
+  - npm run test
+  - npm run build
 jobs:
   include:
-    - stage: Build and test
-      script:
-        - npm run lint
-        - npm run test
-        - npm run build
     - stage: npm beta release
       if: branch = edge
       node_js: '10'
