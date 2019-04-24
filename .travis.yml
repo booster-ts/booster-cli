@@ -13,6 +13,11 @@ script:
   - npm run build
 jobs:
   include:
+    - stage: Send Coverage to Codacy
+      node_js: '10'
+      script:
+        - npm run test
+        - cat ./coverage/lcov.info | codacy-coverage
     - stage: npm beta release
       if: branch = edge
       node_js: '10'
