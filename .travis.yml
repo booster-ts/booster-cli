@@ -1,6 +1,9 @@
 language: node_js
 node_js:
+  - '12'
+  - '10'
   - '8'
+
 cache: npm
 install:
   - npm ci
@@ -13,6 +16,7 @@ jobs:
         - npm run build
     - stage: npm beta release
       if: branch = edge
+      node_js: '10'
       script: npm run build
       deploy:
         provider: npm
@@ -25,6 +29,7 @@ jobs:
     - stage: npm release
       if: branch = master
       script: npm run build
+      node_js: '10'
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
