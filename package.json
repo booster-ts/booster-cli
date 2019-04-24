@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "@booster-ts/core": "0.0.1",
-    "commander": "^2.20.0"
+    "@types/fs-extra": "^5.0.5",
+    "commander": "^2.20.0",
+    "fs-extra": "^7.0.1"
   }
 }

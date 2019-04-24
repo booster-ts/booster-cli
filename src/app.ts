@@ -19,7 +19,8 @@ command.handler();
 
 const options = command.getOptions();
 if (options.init) {
-    console.log(`Create New Project ${options.init}`);
+    console.log(`Creating New Project ${options.init}`);
     creator.handler(options.init);
+    console.log(`Created New Project ${options.init}`);
 } else
     generator.handler();
