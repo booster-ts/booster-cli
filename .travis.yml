@@ -13,7 +13,7 @@ script:
   - npm run build
 jobs:
   include:
-    - stage: Send Coverage
+    - stage: Send Coverage to Codacy
       node_js: '10'
       script:
         - npm run test
