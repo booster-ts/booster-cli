@@ -11,7 +11,7 @@ script:
   - npm run lint
   - npm run test
   - npm run build
-  - cat ./coverage/lcov.info | codacy-coverage
+
 jobs:
   include:
     - stage: npm beta release
