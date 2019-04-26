@@ -55,7 +55,7 @@ export default class Generator {
 
     private getInjectFile(dest, fileName) {
         const base = path.join(this.pathHandler.getProjectPath(), this.config.getConfig().root);
-        return path.relative(`${this.pathHandler.getProjectPath()}/${dest}/${fileName}`, base);
+        return path.relative(`${base}/${dest}/${fileName}`, base);
     }
 
 }
