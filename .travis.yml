@@ -11,13 +11,9 @@ script:
   - npm run lint
   - npm run test
   - npm run build
+  - cat ./coverage/lcov.info | codacy-coverage
 jobs:
   include:
-    - stage: Send Coverage to Codacy
-      node_js: '10'
-      script:
-        - npm run test
-        - cat ./coverage/lcov.info | codacy-coverage
     - stage: npm beta release
       if: branch = edge
       node_js: '10'
