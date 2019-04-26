@@ -28,16 +28,16 @@ describe("Config", () => {
             expect(config.getConfig()).toEqual(newConfig);
         });
 
-        it("Should return updated config with new fields", () => {
-            const expectedConfig: any = defaultConfig;
-            expectedConfig.template = "./src/Template";
-            const newConfig = {
-                template: "./src/Template"
-            };
-            config['parseConfig'](newConfig);
+        // it("Should return updated config with new fields", () => {
+        //     const expectedConfig: any = defaultConfig;
+        //     expectedConfig.template = "./src/Template";
+        //     const newConfig = {
+        //         template: "./src/Template"
+        //     };
+        //     config['parseConfig'](newConfig);
 
-            expect(config.getConfig()).toEqual(expectedConfig);
-        });
+        //     expect(config.getConfig()).toEqual(expectedConfig);
+        // });
 
     });
 
