@@ -13,13 +13,13 @@ export default class Creator {
 
     public handler(projectName: string) {
         const currentPath = this.pathHandler.getCurrentPath();
-        fs.mkdirSync(projectName);
+        this.createFolder(projectName);
         process.chdir(projectName);
         execSync("git init");
         execSync("npm init -y");
         execSync("npm i @booster-ts/core --save");
         execSync("npm i typescript --save");
-        fs.mkdirSync("./src");
+        this.createFolder("./src");
         fs.copyFileSync(
             `${this.pathHandler.getRootPath()}/ressources/tsconfig.json`, "./tsconfig.json"
         );
@@ -42,5 +42,10 @@ export default class Creator {
             build: "tsc"
         };
         fs.writeFileSync(`./package.json`, JSON.stringify(packageFile, null, 4));
+    }
+
+    private createFolder(folderName: string) {
+        if (!fs.existsSync(folderName))
+            fs.mkdirSync(folderName);
     }
 }
