@@ -26,6 +26,7 @@ export default class Config {
         ];
 
         for (const currentPath of paths) {
+            config = null;
             try {
                 const file = fs.readFileSync(`${currentPath}/.booster/config.json`)
                 .toString('utf-8');

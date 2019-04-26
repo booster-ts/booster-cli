@@ -3,6 +3,7 @@ import { PathHandler } from '../PathHandler/PathHandler';
 import { Commands } from '../Commands/Commands';
 import Config from '../Config/Config';
 import * as fs from 'fs';
+import * as fse from 'fs-extra';
 import * as path from 'path';
 
 @booster()
@@ -18,6 +19,7 @@ export default class Generator {
         const options = this.commands.getOptions();
         const templates = this.commands.getTemplates();
         let fileName: string;
+        const base = this.pathHandler.getProjectPath();
 
         templates.forEach((template) => {
             if (options[template]) {
@@ -25,12 +27,13 @@ export default class Generator {
                 let file = this.getTemplates(template);
                 const dest = this.config.getConfig().root;
                 file = file.replace(/__NAME__/g, fileName);
-                fs.mkdirSync(`${this.pathHandler.getProjectPath()}/${dest}/${fileName}`);
+                file = file.replace(/__SOURCE__/g, `${this.getInjectFile(dest, fileName)}`);
+                fse.mkdirpSync(`${base}/${dest}/${options[template]}`);
                 fs.writeFileSync(
-                    `${this.pathHandler.getProjectPath()}/${dest}/${fileName}/${fileName}.ts`,
+                    `${base}/${dest}/${options[template]}/${fileName}.ts`,
                     file
                 );
-                console.log(`Generate ${template} ${fileName}`);
+                console.log(`Generated ${template} ${options[template]}`);
             }
         });
     }
@@ -48,6 +51,11 @@ export default class Generator {
             // tslint:disable-next-line:no-empty
             } catch (e) { }
         return file;
+    }
+
+    private getInjectFile(dest, fileName) {
+        const base = path.join(this.pathHandler.getProjectPath(), this.config.getConfig().root);
+        return path.relative(`${this.pathHandler.getProjectPath()}/${dest}/${fileName}`, base);
     }
 
 }
