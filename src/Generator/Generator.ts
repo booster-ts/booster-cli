@@ -18,16 +18,16 @@ export default class Generator {
     public handler() {
         const options = this.commands.getOptions();
         const templates = this.commands.getTemplates();
-        let fileName: string;
         const base = this.pathHandler.getProjectPath();
 
         templates.forEach((template) => {
             if (options[template]) {
-                fileName = path.basename(options[template]);
+                const fileName = path.basename(options[template]);
                 let file = this.getTemplates(template);
                 const dest = this.config.getConfig().root;
+                const injectFile = this.getInjectFile(dest, options[template]);
                 file = file.replace(/__NAME__/g, fileName);
-                file = file.replace(/__SOURCE__/g, `${this.getInjectFile(dest, fileName)}`);
+                file = file.replace(/__SOURCE__/g, injectFile);
                 fse.mkdirpSync(`${base}/${dest}/${options[template]}`);
                 fs.writeFileSync(
                     `${base}/${dest}/${options[template]}/${fileName}.ts`,
@@ -54,8 +54,8 @@ export default class Generator {
     }
 
     private getInjectFile(dest, fileName) {
-        const base = path.join(this.pathHandler.getProjectPath(), this.config.getConfig().root);
-        return path.relative(`${base}/${dest}/${fileName}`, base);
+        const base = path.join(this.pathHandler.getProjectPath(), dest);
+        return path.relative(`${base}/${fileName}`, base);
     }
 
 }
