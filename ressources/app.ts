@@ -1,3 +1,3 @@
-import { Injector } from '@booster-ts/core';
+import injector from './injector';
 
-const container = new Injector();
+/** This is the entrypoint */

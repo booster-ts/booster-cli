@@ -1,6 +1,6 @@
 {
-  "name": "booster-cli",
-  "version": "0.0.1",
+  "name": "@booster-ts/cli",
+  "version": "0.1.1",
   "description": "CLI for Booster-ts",
   "main": "dist/app.js",
   "scripts": {
@@ -34,12 +34,15 @@
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "@types/node": "^11.13.5",
+    "codacy-coverage": "^3.4.0",
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0"
   },
   "dependencies": {
     "@booster-ts/core": "0.0.1",
-    "commander": "^2.20.0"
+    "@types/fs-extra": "^5.0.5",
+    "commander": "^2.20.0",
+    "fs-extra": "^7.0.1"
   }
 }
