@@ -1,4 +1,6 @@
 language: node_js
+services:
+  - docker
 node_js:
   - '12'
   - '10'
@@ -14,6 +16,10 @@ script:
 
 jobs:
   include:
+    - stage: Functional Testing
+      node_js: '10'
+      script: npm run docker-func
+
     - stage: npm beta release
       if: branch = edge
       node_js: '10'

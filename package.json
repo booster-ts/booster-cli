@@ -5,6 +5,8 @@
   "main": "dist/app.js",
   "scripts": {
     "test": "jest -c ./tests/config.js",
+    "test-func": "jest -c ./tests/config.func.js --watchAll",
+    "docker-func": "docker run -ti -v $PWD:/home/node/app/:rw node:latest /bin/sh -c 'cd /home/node/app; sh tests/function.sh;'",
     "build": "tsc",
     "lint": "tslint --project ./tsconfig.json -c ./tslint.json",
     "clean": "rm -rf dist"
@@ -32,7 +34,7 @@
   },
   "homepage": "https://github.com/booster-ts/booster-cli#readme",
   "devDependencies": {
-    "@types/jest": "^24.0.11",
+    "@types/jest": "^24.0.13",
     "@types/node": "^11.13.5",
     "codacy-coverage": "^3.4.0",
     "jest": "^24.7.1",

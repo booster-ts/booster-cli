@@ -2,6 +2,7 @@ import { booster } from '@booster-ts/core';
 import { PathHandler } from '../PathHandler/PathHandler';
 import { IConfig, defaultConfig } from './IConfig';
 import * as fs from 'fs';
+import { join } from 'path';
 
 @booster()
 export default class Config {
@@ -38,6 +39,14 @@ export default class Config {
                 return;
             }
         }
+    }
+
+    public getTemplatePath(templateName: string) {
+        const config = this.getConfig();
+        const path = config[templateName];
+        if (path)
+            return join(config.root, path);
+        return config.root;
     }
 
     private parseConfig(config: object) {
