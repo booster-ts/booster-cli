@@ -72,7 +72,7 @@ describe("Config", () => {
                 root: './src',
                 template: 'temp/'
             });
-            expect(config.getTemplatePath('template')).toBe('temp/');
+            expect(config.getTemplatePath('template')).toBe('src/temp/');
         });
 
     });
