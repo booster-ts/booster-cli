@@ -59,4 +59,22 @@ describe("Config", () => {
         });
     });
 
+    describe("getTemplatePath", () => {
+
+        beforeEach(() => {
+            injector = null;
+            injector = new Injector();
+            config = injector.inject(Config);
+        });
+
+        it("Should find template root from config file", () => {
+            spyOn(config, 'getConfig').and.returnValue({
+                root: './src',
+                template: 'temp/'
+            });
+            expect(config.getTemplatePath('template')).toBe('src/temp/');
+        });
+
+    });
+
 });
