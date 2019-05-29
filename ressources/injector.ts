@@ -19,7 +19,7 @@ export const loadFiles = (dirName: string) => {
         relativeDir = dirName;
     const contents = fs.readdirSync(relativeDir);
     for (const content of contents) {
-        const filePath = path.join(relativeDir, content)
+        const filePath = path.join(relativeDir, content);
         if (fs.statSync(filePath).isDirectory())
             loadFiles(filePath);
         else if (!fileLoaded) {
@@ -27,4 +27,4 @@ export const loadFiles = (dirName: string) => {
             fileLoaded = true;
         }
     }
-}
+};
