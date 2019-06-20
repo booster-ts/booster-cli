@@ -4,9 +4,14 @@ import { IConfig, defaultConfig } from './IConfig';
 import * as fs from 'fs';
 import { join } from 'path';
 
+/**
+ * Config
+ * @desciptions Config Handler
+ */
 @booster()
 export default class Config {
 
+    /** Config */
     private config: IConfig;
 
     constructor(
@@ -15,10 +20,18 @@ export default class Config {
         this.config = defaultConfig;
     }
 
+    /**
+     * getConfig
+     * @description Returns current config
+     */
     public getConfig(): IConfig {
         return this.config;
     }
 
+    /**
+     * handler
+     * @description Handles Config file
+     */
     public handler() {
         let config: IConfig = null;
         const paths = [
@@ -41,6 +54,11 @@ export default class Config {
         }
     }
 
+    /**
+     * getTemplatePath
+     * @description Gets a specific template path
+     * @param templateName to find
+     */
     public getTemplatePath(templateName: string) {
         const config = this.getConfig();
         const path = config[templateName];
@@ -49,6 +67,11 @@ export default class Config {
         return config.root;
     }
 
+    /**
+     * parseConfig
+     * @description Parse config
+     * @param config to parse
+     */
     private parseConfig(config: object) {
         for (const key in config)
             if (config.hasOwnProperty(key))

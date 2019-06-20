@@ -6,6 +6,10 @@ import * as fs from 'fs';
 import * as fse from 'fs-extra';
 import * as path from 'path';
 
+/**
+ * Generator
+ * @description Generates Files
+ */
 @booster()
 export default class Generator {
 
@@ -15,6 +19,10 @@ export default class Generator {
         private config: Config
     ) { }
 
+    /**
+     * handler
+     * @description Handles creating file
+     */
     public handler() {
         const options = this.commands.getOptions();
         const templates = this.commands.getTemplates();
@@ -39,6 +47,11 @@ export default class Generator {
         });
     }
 
+    /**
+     * getTemplates
+     * @description Get Template
+     * @param type template type
+     */
     private getTemplates(type: string) {
         const paths = [
             this.pathHandler.getProjectPath(),
@@ -54,6 +67,13 @@ export default class Generator {
         return file;
     }
 
+    /**
+     * getInjectFile
+     * @description Searches for inject file in project
+     * @param dest root src folder
+     * @param baseFile where template will be generated
+     * @param fileName generated file name
+     */
     private getInjectFile(dest, baseFile, fileName) {
         const base = path.join(this.pathHandler.getProjectPath(), dest);
         return path.relative(`${baseFile}/${fileName}`, base);

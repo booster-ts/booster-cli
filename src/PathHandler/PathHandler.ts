@@ -57,6 +57,11 @@ export class PathHandler {
         }
     }
 
+    /**
+     * getParent
+     * @description Finds parent path
+     * @param currentPath child path
+     */
     private getParent(currentPath: string) {
         return path.resolve(currentPath, '..');
     }

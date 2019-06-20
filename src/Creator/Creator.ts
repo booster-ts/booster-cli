@@ -4,6 +4,10 @@ import * as fs from 'fs';
 import { execSync, exec } from 'child_process';
 import { IPackage } from './IPackage';
 
+/**
+ * Creator
+ * @description Project Creator
+ */
 @booster()
 export default class Creator {
 
@@ -11,6 +15,11 @@ export default class Creator {
         private pathHandler: PathHandler
     ) { }
 
+    /**
+     * handler
+     * @description Created Project
+     * @param projectName 
+     */
     public handler(projectName: string) {
         const currentPath = this.pathHandler.getCurrentPath();
         this.createFolder(projectName);
@@ -31,6 +40,10 @@ export default class Creator {
         process.chdir(currentPath);
     }
 
+    /**
+     * updatePackage
+     * @description Updated package.json
+     */
     private updatePackage() {
         const buffer = fs.readFileSync(`./package.json`).toString('utf-8');
         const packageFile = JSON.parse(buffer) as IPackage;
@@ -44,6 +57,11 @@ export default class Creator {
         fs.writeFileSync(`./package.json`, JSON.stringify(packageFile, null, 4));
     }
 
+    /**
+     * createFolder
+     * @description Created folder, handles if already exists
+     * @param folderName to create
+     */
     private createFolder(folderName: string) {
         if (!fs.existsSync(folderName))
             fs.mkdirSync(folderName);
