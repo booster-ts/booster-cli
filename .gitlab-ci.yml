@@ -1,0 +1,65 @@
+image: node:6
+
+before_script:
+  - apt-get install docker
+  - npm install
+
+cache:
+  paths:
+    - node_modules/
+
+test:lint:
+  script:
+    - npm run lint
+
+test:node:6:
+  script:
+    - npm run build
+    - npm test
+    - npm run docker-func
+
+test:node:7:
+  image: node:7
+  script:
+    - npm run build
+    - npm test
+    - npm run docker-func
+
+test:node:8:
+  image: node:8
+  script:
+    - npm run build
+    - npm test
+    - npm run docker-func
+
+test:node:10:
+  image: node:10
+  script:
+    - npm run build
+    - npm test
+    - npm run docker-func
+
+test:node:12:
+  image: node:12
+  script:
+    - npm run build
+    - npm test
+    - npm run docker-func
+
+publish:
+  stage: deploy
+  only:
+    - master
+  script:
+    - npm run build
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
+    - npm publish --tag beta
+
+release:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - npm run build
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
+    - node ./scripts/release.js
