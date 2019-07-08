@@ -19,21 +19,23 @@ export default class Generator {
         const options = this.commands.getOptions();
         const templates = this.commands.getTemplates();
         const base = this.pathHandler.getProjectPath();
-
+        const root = this.config.getConfig().root;
+        const templateName = getTemplate(options.rawArgs);
+        const name = getTemplateName(options.rawArgs, templateName);
         templates.forEach((template) => {
-            if (options[template]) {
-                const fileName = path.basename(options[template]);
+            if (templateName.toLowerCase() === template.toLowerCase()) {
+                const fileName = path.basename(name);
                 let file = this.getTemplates(template);
-                const dest = this.config.getConfig().root;
-                const injectFile = this.getInjectFile(dest, options[template]);
+                const dest = this.config.getTemplatePath(template);
+                const injectFile = this.getInjectFile(root, dest, name);
                 file = file.replace(/__NAME__/g, fileName);
                 file = file.replace(/__SOURCE__/g, injectFile);
-                fse.mkdirpSync(`${base}/${dest}/${options[template]}`);
+                fse.mkdirpSync(`${base}/${dest}/${name}`);
                 fs.writeFileSync(
-                    `${base}/${dest}/${options[template]}/${fileName}.ts`,
+                    `${base}/${dest}/${name}/${fileName}.ts`,
                     file
                 );
-                console.log(`Generated ${template} ${options[template]}`);
+                console.log(`Generated ${template.toLowerCase()} ${name}`);
             }
         });
     }
@@ -53,9 +55,31 @@ export default class Generator {
         return file;
     }
 
-    private getInjectFile(dest, fileName) {
+    private getInjectFile(dest, baseFile, fileName) {
         const base = path.join(this.pathHandler.getProjectPath(), dest);
-        return path.relative(`${base}/${fileName}`, base);
+        return path.relative(`${baseFile}/${fileName}`, base);
     }
 
 }
+
+const getTemplate = (args: Array<string>, offset = 2) => {
+    let index = -1;
+    for (const arg of args) {
+        index += 1;
+        if (index < offset)
+            continue;
+        if (arg[0] !== '-' && arg[1] !== '-')
+            return arg;
+    }
+    return null;
+};
+
+const getTemplateName = (args: Array<string>, template: string) => {
+    let index = -1;
+    for (const arg of args) {
+        index++;
+        if (arg === template)
+            return args[index + 1];
+    }
+    return null;
+};

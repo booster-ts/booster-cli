@@ -27,7 +27,9 @@ export class Commands {
     public handler(): void {
         this.commander.option("init <project>", "Create new Project");
         this.findTemplates().forEach((template) => {
-            this.commander.option(`${template} <name>`, `Create New ${template}`);
+            this.commander.option(
+                `${template} <name>`, `Create New ${template}`
+            );
         });
         this.commander.parse(process.argv);
     }
@@ -43,7 +45,8 @@ export class Commands {
                     return path.extname(file) === ".ts";
                 });
                 files = files.map((file) => {
-                    return file.replace('.ts', '');
+                    file = file.replace('.ts', '');
+                    return file;
                 });
                 templates.push(...files);
             // tslint:disable-next-line:no-empty
