@@ -25,7 +25,7 @@ jobs:
       script: npm run docker-func
 
     - stage: npm beta release
-      if: branch = master
+      if: branch = master AND type ! pull_request
       node_js: '10'
       script:
         - npm run build
