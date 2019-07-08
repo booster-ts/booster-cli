@@ -22,7 +22,7 @@ export default class Generator {
         const root = this.config.getConfig().root;
         const templateName = getTemplate(options.rawArgs);
         const name = getTemplateName(options.rawArgs, templateName);
-        for (const template of templates) {
+        for (const template of templates)
             if (templateName.toLowerCase() === template.toLowerCase()) {
                 const fileName = path.basename(name);
                 let file = this.getTemplates(template);
@@ -38,7 +38,6 @@ export default class Generator {
                 console.log(`Generated ${template.toLowerCase()} ${name}`);
                 return 0;
             }
-        }
         return 1;
     }
 
