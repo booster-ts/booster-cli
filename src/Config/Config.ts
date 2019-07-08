@@ -43,7 +43,7 @@ export default class Config {
 
     public getTemplatePath(templateName: string) {
         const config = this.getConfig();
-        const path = config[templateName];
+        const path = getParameterCaseInsensitive(config, templateName);
         if (path)
             return join(config.root, path);
         return config.root;
@@ -55,3 +55,15 @@ export default class Config {
                 this.config[key] = config[key];
     }
 }
+
+/**
+ * getParameterCaseInsensitive
+ * @description Finds key in object (case insensitive)
+ * @param object where to find key
+ * @param key to find
+ */
+const getParameterCaseInsensitive = (object, key) => {
+    return object[Object.keys(object)
+      .find((k) => k.toLowerCase() === key.toLowerCase())
+    ];
+};

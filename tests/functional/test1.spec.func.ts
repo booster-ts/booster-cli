@@ -60,12 +60,17 @@ describe("Function Test 1", () => {
 
     it("Should read template source folder from config", () => {
         const config = {
-            root: './src',
-            template: './template'
+            root: 'src/',
+            template: 'template/'
         };
         fs.writeFileSync("./.booster/config.json", JSON.stringify(config));
-        execSync("boost template service");
-        expect(fs.existsSync("./src/template/service/service.ts")).toBeTruthy();
+        execSync("boost template service1");
+        expect(fs.existsSync("./src/template/service1/service1.ts")).toBeTruthy();
+    });
+
+    it("Should support template name as case insenstive", () => {
+        execSync("boost tEmplate service2");
+        expect(fs.existsSync("./src/template/service1/service1.ts")).toBeTruthy();
     });
 
     it("Should compile project", () => {
