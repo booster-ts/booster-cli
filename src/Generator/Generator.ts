@@ -15,14 +15,14 @@ export default class Generator {
         private config: Config
     ) { }
 
-    public handler() {
+    public handler(): number {
         const options = this.commands.getOptions();
         const templates = this.commands.getTemplates();
         const base = this.pathHandler.getProjectPath();
         const root = this.config.getConfig().root;
         const templateName = getTemplate(options.rawArgs);
         const name = getTemplateName(options.rawArgs, templateName);
-        templates.forEach((template) => {
+        for (const template of templates)
             if (templateName.toLowerCase() === template.toLowerCase()) {
                 const fileName = path.basename(name);
                 let file = this.getTemplates(template);
@@ -36,8 +36,9 @@ export default class Generator {
                     file
                 );
                 console.log(`Generated ${template.toLowerCase()} ${name}`);
+                return 0;
             }
-        });
+        return 1;
     }
 
     private getTemplates(type: string) {

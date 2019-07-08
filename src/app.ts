@@ -23,4 +23,4 @@ if (options.init) {
     creator.handler(options.init);
     console.log(`Created New Project ${options.init}`);
 } else
-    generator.handler();
+    process.exitCode = generator.handler();
