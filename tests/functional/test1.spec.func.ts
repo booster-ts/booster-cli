@@ -1,7 +1,7 @@
 import { execSync, exec } from "child_process";
 import * as fs from 'fs';
 
-describe("Function Test 1", () => {
+describe("Functional Test 1", () => {
 
     let currentPWD;
 
@@ -71,6 +71,14 @@ describe("Function Test 1", () => {
     it("Should support template name as case insenstive", () => {
         execSync("boost tEmplate service2");
         expect(fs.existsSync("./src/template/service1/service1.ts")).toBeTruthy();
+    });
+
+    it("Should exit with code 1 when template not found", (done) => {
+        exec("boost temmplate service3")
+        .on('exit', (code) => {
+            expect(code).toBe(1);
+            done();
+        });
     });
 
     it("Should compile project", () => {
