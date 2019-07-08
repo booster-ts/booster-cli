@@ -1,12 +1,18 @@
 language: node_js
+
+services:
+  - docker
+
 node_js:
   - '12'
   - '10'
   - '8'
 
 cache: npm
+
 install:
   - npm ci
+
 script:
   - npm run lint
   - npm run test
@@ -14,27 +20,23 @@ script:
 
 jobs:
   include:
+    - stage: Functional Testing
+      node_js: '10'
+      script: npm run docker-func
+
     - stage: npm beta release
-      if: branch = edge
-      node_js: '10'
-      script: npm run build
-      deploy:
-        provider: npm
-        email: '$NPM_EMAIL'
-        api_key: '$NPM_TOKEN'
-        skip_cleanup: true
-        tag: beta
-        on:
-          branch: edge
-    - stage: npm release
       if: branch = master
+      node_js: '10'
+      script:
+        - npm run build
+        - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+        - npm publish --tag beta
+
+    - stage: npm release
+      if: tag IS present
       script: npm run build
       node_js: '10'
-      deploy:
-        provider: npm
-        email: '$NPM_EMAIL'
-        api_key: '$NPM_TOKEN'
-        skip_cleanup: true
-        on:
-          branch: master
-          tags: true
+      script:
+        - npm run build
+        - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+        - node ./scripts/release.js
