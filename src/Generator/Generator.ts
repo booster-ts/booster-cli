@@ -80,7 +80,7 @@ const getTemplateName = (args: Array<string>, template: string) => {
     for (const arg of args) {
         index++;
         if (arg === template)
-            return args[index + 1];
+            return args[index + 1] || null;
     }
     return null;
 };
