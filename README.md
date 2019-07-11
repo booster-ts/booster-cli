@@ -1,7 +1,8 @@
 # booster-cli
 
-https://api.travis-ci.com/booster-ts/booster-cli.svg?branch=master
 [![Build Status](https://api.travis-ci.com/booster-ts/booster-cli.svg?branch=master)](https://travis-ci.org/booster-ts/booster-cli)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/664ee35dd9094e4f9d06bd8a5eeb5817)](https://www.codacy.com/app/ImOverlord/booster-cli?utm_source=github.com&utm_medium=referral&utm_content=booster-ts/booster-cli&utm_campaign=Badge_Coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/664ee35dd9094e4f9d06bd8a5eeb5817)](https://www.codacy.com/app/ImOverlord/booster-cli?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=booster-ts/booster-cli&amp;utm_campaign=Badge_Grade)
 
 CLI for Booster
 
