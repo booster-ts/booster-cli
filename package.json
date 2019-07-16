@@ -43,7 +43,10 @@
   },
   "dependencies": {
     "@booster-ts/core": "0.0.1",
+    "@types/clui": "^0.3.0",
     "@types/fs-extra": "^5.0.5",
+    "chalk": "^2.4.2",
+    "clui": "^0.3.6",
     "commander": "^2.20.0",
     "fs-extra": "^7.0.1"
   }

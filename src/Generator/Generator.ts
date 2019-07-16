@@ -5,6 +5,7 @@ import Config from '../Config/Config';
 import * as fs from 'fs';
 import * as fse from 'fs-extra';
 import * as path from 'path';
+import chalk from 'chalk';
 
 @booster()
 export default class Generator {
@@ -35,7 +36,7 @@ export default class Generator {
                     `${base}/${dest}/${name}/${fileName}.ts`,
                     file
                 );
-                console.log(`Generated ${template.toLowerCase()} ${name}`);
+                console.log(chalk.green(`Generated ${template.toLowerCase()} ${name}`));
                 return 0;
             }
         return 1;

@@ -18,9 +18,8 @@ config.handler();
 command.handler();
 
 const options = command.getOptions();
-if (options.init) {
-    console.log(`Creating New Project ${options.init}`);
-    creator.handler(options.init);
-    console.log(`Created New Project ${options.init}`);
-} else
+if (options.init)
+    creator.handler(options.init)
+    .then(() => process.exit(0));
+else
     process.exitCode = generator.handler();
