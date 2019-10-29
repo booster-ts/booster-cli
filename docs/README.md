@@ -8,9 +8,9 @@ CLI for Booster-ts
 
 ## Install
 
-Booster-cli is available on npm
+Booster-cli is available on npm.
 
-```sh
+```bash
 $ npm i -g @booster-ts/cli
 ```
 
@@ -18,7 +18,7 @@ $ npm i -g @booster-ts/cli
 
 ### Creating a new Project
 
-```sh
+```bash
 $ boost init ProjectName
 ```
 
@@ -27,7 +27,7 @@ You can start working on your app with the entry file *src/app.ts*.
 
 You can now use the CLI to generate the class files
 
-```sh
+```bash
 $ boost template FileName
 ```
 
