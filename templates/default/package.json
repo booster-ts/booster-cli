@@ -16,6 +16,6 @@
     "keywords": [],
     "author": "Booster-TS",
     "booster": {
-        "cli-version": "<%= cli-version %>"
+
     }
 }

@@ -15,9 +15,13 @@ describe("Functional Test 1", () => {
         execSync("boost --help");
     });
 
-    it("Should created new Project", () => {
-        execSync("boost new project1 &> /dev/null");
-        expect(fs.existsSync("project1")).toBeTruthy();
+    it("Should created new Project", (done) => {
+        const cmd = exec('boost new project1');
+        cmd.on('exit', (code) => {
+            expect(code).toBe(0);
+            expect(fs.existsSync("project1")).toBeTruthy();
+            done();
+        });
     });
 
     it("Should have the correct files", () => {
@@ -81,8 +85,12 @@ describe("Functional Test 1", () => {
         });
     });
 
-    it("Should compile project", () => {
-        execSync("npm run build");
+    it("Should compile project", (done) => {
+        const cmd = exec("npm run build");
+        cmd.on('exit', (code) => {
+            expect(code).toBe(0);
+            done();
+        });
     });
 
     afterAll(() => {

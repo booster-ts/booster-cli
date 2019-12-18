@@ -1,3 +1,3 @@
-import injector from './injector';
+import { inject } from './injector';
 
 /** This is the entrypoint */
