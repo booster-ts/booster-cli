@@ -86,6 +86,7 @@ describe("Functional Test 1", () => {
     });
 
     it("Should compile project", (done) => {
+        jest.setTimeout(10000);
         const cmd = exec("npm run build");
         cmd.on('exit', (code) => {
             expect(code).toBe(0);
