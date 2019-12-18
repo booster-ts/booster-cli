@@ -71,4 +71,4 @@ module.exports = class extends Generator {
         const base = path.join(this.pathHandler.getProjectPath(), dest);
         return path.relative(`${baseFile}/${fileName}`, base);
     }
-}
+};

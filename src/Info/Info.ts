@@ -55,10 +55,9 @@ export class Info {
     }
 
     private findCreatorName(boosterInfo: object): string {
-        for (const key in boosterInfo) {
+        for (const key in boosterInfo)
             if (key.match(/\w*-creator/))
                 return key;
-        }
         return null;
     }
 
