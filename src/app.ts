@@ -3,6 +3,7 @@
 import program = require("commander");
 import { Generator, IGeneratorOptions } from "./Generator/Generator";
 import { Creator, ICreatorOptions } from "./Creator/Creator";
+import { Info } from './Info/Info';
 const info = require("../package.json");
 
 const generate = () => {
@@ -34,6 +35,13 @@ const create = () => {
     };
 };
 
+const displayInfo = () => {
+    return () => {
+        (new Info()).handler()
+        .catch(errorHandler());
+    };
+};
+
 const errorHandler = () => {
     return (e) => {
         process.exitCode = 1;
@@ -48,9 +56,11 @@ program
 .version(info.version)
 .command('new <project-name>', "Create a new Booster Project")
 .command('generate <template> [file-name]', "Generate new File(s) based on a template")
+.command('info', "Display Booster Info")
 .on("command:new", create())
 .on("command:generate", generate())
 .on("command:g", generate())
+.on("command:info", displayInfo())
 .on("command:help", () => {
     program.help();
 })

@@ -12,6 +12,9 @@ module.exports = class extends Generator {
 
     constructor(args, opts) {
         super(args, opts);
+
+        this.props['CreatorName'] = "default-creator";
+        this.props['CreatorVersion'] = '1.0.0';
     }
 
     public prompting() {
@@ -30,7 +33,7 @@ module.exports = class extends Generator {
             });
 
         return this.prompt(prompts).then((props) => {
-            this.props = props;
+            this.props = {...this.props, ...props};
             if (this.options.name)
                 this.props['projectname'] = this.options.name;
         });
