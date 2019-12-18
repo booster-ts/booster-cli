@@ -57,11 +57,17 @@ module.exports = class extends Generator {
             path.join(this.pathHandler.getProjectPath(), '.booster'),
             path.join(this.pathHandler.getRootPath(), '.booster')
         ];
+        const templateName = this.templateName.toLocaleLowerCase();
 
         for (const currentPath of paths) {
-            const templatePath = path.join(currentPath, `${this.templateName}.ts`);
-            if (fs.existsSync(templatePath))
-                return templatePath;
+            if (!fs.existsSync(currentPath))
+                continue;
+            const templates = fs.readdirSync(currentPath);
+            for (const file of templates)
+                if (templateName.match((path.parse(file).name).toLocaleLowerCase())) {
+                    const templatePath = path.join(currentPath, `${file}`);
+                    return templatePath;
+                }
         }
         throw new Error(`Template ${this.templateName} Not Found`);
     }

@@ -45,7 +45,15 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
             this.templatePath('**'),
             this.destinationPath(`${this.props['projectname']}`),
-            this.props
+            this.props,
+            {},
+            {}
+        );
+        console.log(this.templatePath('.booster'));
+        this.fs.copy(
+            this.templatePath('.booster'),
+            this.destinationPath(`${this.props['projectname']}/.booster`),
+            { globOptions: {dot: true} }
         );
     }
 

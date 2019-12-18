@@ -14,7 +14,7 @@ install:
   - npm ci
 
 script:
-  - npm run lint
+  - npm run test:lint
   - npm run test:docker
   - npm run build
 
