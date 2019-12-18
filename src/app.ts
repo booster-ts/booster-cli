@@ -1,26 +1,62 @@
 #!/usr/bin/env node
 
-import { Injector } from '@booster-ts/core';
-import { Commands } from './Commands/Commands';
-import { PathHandler } from './PathHandler/PathHandler';
-import Creator from './Creator/Creator';
-import Generator from './Generator/Generator';
-import Config from './Config/Config';
+import program = require("commander");
+import { Generator, IGeneratorOptions } from "./Generator/Generator";
+import { Creator, ICreatorOptions } from "./Creator/Creator";
+const info = require("../package.json");
 
-const container = new Injector();
-const path = container.inject(PathHandler);
-const command = container.inject(Commands);
-const creator = container.inject(Creator);
-const generator = container.inject(Generator);
-const config = container.inject(Config);
+const generate = () => {
+    return (...options) => {
+        const [template, file] = options[0];
+        if (!template && !file) {
+            (new Generator()).getTemplates();
+            return;
+        }
+        const option: IGeneratorOptions = {
+            file,
+            template,
+            flags: options[1]
+        };
+        (new Generator()).handler(option)
+        .catch(errorHandler());
+    };
+};
 
-config.handler();
-command.handler();
+const create = () => {
+    return (...options) => {
+        const [ project ] = options[0];
+        const config: ICreatorOptions = {
+            name: project,
+            flags: options[1]
+        };
+        (new Creator()).handler(config)
+        .catch(errorHandler());
+    };
+};
 
-const options = command.getOptions();
-if (options.init) {
-    console.log(`Creating New Project ${options.init}`);
-    creator.handler(options.init);
-    console.log(`Created New Project ${options.init}`);
-} else
-    process.exitCode = generator.handler();
+const errorHandler = () => {
+    return (e) => {
+        process.exitCode = 1;
+        console.log(`❌  ${e.message}.`);
+    };
+};
+
+// tslint:disable-next-line: no-empty
+program.addImplicitHelpCommand = () => {};
+
+program
+.version(info.version)
+.command('new <project-name>', "Create a new Booster Project")
+.command('generate <template> [file-name]', "Generate new File(s) based on a template")
+.on("command:new", create())
+.on("command:generate", generate())
+.on("command:g", generate())
+.on("command:help", () => {
+    program.help();
+})
+.on("command:*", (...options) => {
+    const [ command ] = options[0];
+    process.exitCode = 1;
+    console.log(`❌  The command ${command} is invalid.`);
+})
+.parse(process.argv);

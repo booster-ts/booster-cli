@@ -1,8 +1,6 @@
-import { booster } from '@booster-ts/core';
 import * as path from 'path';
 import * as fs from 'fs';
 
-@booster()
 export class PathHandler {
 
     /**
@@ -24,9 +22,9 @@ export class PathHandler {
     /**
      * getProjectPath
      * @description Returns path to current project which used the CLI
-     * @param ticks number of child it should check
+     * @param ticks number of parent folder it should check
      */
-    public getProjectPath(ticks = 3): string {
+    public getProjectPath(ticks = 5): string {
         let currentPath = this.getCurrentPath();
         let ttl = ticks;
 
@@ -37,6 +35,24 @@ export class PathHandler {
             ttl--;
         }
         return this.getCurrentPath();
+    }
+
+    /**
+     * isInProject
+     * @description Checks if in a Node Project
+     * @param ticks number of parent folder it should check
+     */
+    public isInProject(ticks = 5): boolean {
+        let currentPath = this.getCurrentPath();
+        let ttl = ticks;
+
+        while (ttl > 0) {
+            if (this.isPackageHere(currentPath))
+                return true;
+            currentPath = this.getParent(currentPath);
+            ttl--;
+        }
+        return false;
     }
 
     /**
@@ -57,7 +73,13 @@ export class PathHandler {
         }
     }
 
+    /**
+     * getParent
+     * @description return parents folder path
+     * @param currentPath to get parent
+     */
     private getParent(currentPath: string) {
         return path.resolve(currentPath, '..');
     }
+
 }

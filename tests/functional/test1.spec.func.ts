@@ -16,7 +16,7 @@ describe("Functional Test 1", () => {
     });
 
     it("Should created new Project", () => {
-        execSync("boost init project1 &> /dev/null");
+        execSync("boost new project1 &> /dev/null");
         expect(fs.existsSync("project1")).toBeTruthy();
     });
 
@@ -33,19 +33,19 @@ describe("Functional Test 1", () => {
     });
 
     it("Should create a new Class based of template", () => {
-        execSync("boost template service");
+        execSync("boost g class service");
         expect(fs.existsSync("./src/service/service.ts")).toBeTruthy();
     });
 
-    it("Add new template", () => {
+    it("Should Display list of templates", () => {
         execSync("mkdir -p .booster");
-        execSync("cp ../../.booster/template.ts .booster/router.ts");
-        const out = execSync("boost --help").toString();
+        execSync("cp ../../.booster/class.ts .booster/router.ts");
+        const out = execSync("boost g").toString();
         expect(out).toContain("route");
     });
 
     it("Create new Class with path as name", () => {
-        execSync("boost template Providers/Service");
+        execSync("boost g class Providers/Service");
         expect(fs.existsSync("./src/Providers/Service/Service.ts")).toBeTruthy();
     });
 
@@ -54,27 +54,27 @@ describe("Functional Test 1", () => {
             root: './tmp'
         };
         fs.writeFileSync("./.booster/config.json", JSON.stringify(config));
-        execSync("boost template service");
+        execSync("boost g class service");
         expect(fs.existsSync("./tmp/service/service.ts")).toBeTruthy();
     });
 
     it("Should read template source folder from config", () => {
         const config = {
             root: 'src/',
-            template: 'template/'
+            class: 'template/'
         };
         fs.writeFileSync("./.booster/config.json", JSON.stringify(config));
-        execSync("boost template service1");
+        execSync("boost g class service1");
         expect(fs.existsSync("./src/template/service1/service1.ts")).toBeTruthy();
     });
 
     it("Should support template name as case insenstive", () => {
-        execSync("boost tEmplate service2");
-        expect(fs.existsSync("./src/template/service1/service1.ts")).toBeTruthy();
+        execSync("boost g clAss service2");
+        expect(fs.existsSync("./src/service2/service2.ts")).toBeTruthy();
     });
 
     it("Should exit with code 1 when template not found", (done) => {
-        exec("boost temmplate service3")
+        exec("boost g temmplate service3")
         .on('exit', (code) => {
             expect(code).toBe(1);
             done();
