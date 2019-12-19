@@ -7,7 +7,6 @@ describe("Functional Test 1", () => {
 
     beforeAll(() => {
         currentPWD = process.cwd();
-        execSync("mkdir -p testing");
         process.chdir("testing");
     });
 
@@ -96,7 +95,6 @@ describe("Functional Test 1", () => {
 
     afterAll(() => {
         process.chdir(currentPWD);
-        execSync("rm -rf testing");
     });
 
 });

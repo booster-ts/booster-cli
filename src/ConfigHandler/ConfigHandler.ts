@@ -20,7 +20,7 @@ export class ConfigHandler {
 
     /** Default Booster Config */
     private config: IConfig = {
-        root: 'src/'
+        root: "src/"
     };
 
     constructor(
