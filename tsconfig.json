@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
+        "module": "commonjs",
+        "esModuleInterop": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strict": false,
@@ -12,11 +14,12 @@
         ]
     },
     "include": [
-        "./src/"
+        "src"
     ],
     "exclude": [
         "./tests",
-        "./src/mocks",
+        "src/mocks",
+        "src/Creator/default-creator/templates",
         "node_modules"
     ]
 }

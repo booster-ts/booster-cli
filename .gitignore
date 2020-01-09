@@ -94,3 +94,9 @@ typings/
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+
+
+# DEV Folders
+TEST
+nsrc
+_src

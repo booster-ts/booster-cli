@@ -1,9 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-chown -R $(stat -c "%u:%g" /home/node/) /home/node
-npm ci
-npm run build
-npm i -g --only=production
-boost --help
-chown -R $(stat -c "%u:%g" /home/node/) /home/node
-npm run test-func
+docker image build -t boost-tests:1.0 .
+docker run -ti boost-tests:1.0 /bin/sh -c "npm run test:func -- --runInBand --testTimeout=10000"

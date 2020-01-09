@@ -1,0 +1,21 @@
+{
+    "name": "<%= projectname %>",
+    "version": "0.0.1",
+    "description": "Booster-TS Project",
+    "main": "dist/app.js",
+    "scripts": {
+        "build": "tsc",
+        "start": "node .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "@booster-ts/core": "^0.2.1",
+        "typescript": "^3.7.3"
+    },
+    "devDependencies": {},
+    "keywords": [],
+    "author": "Booster-TS",
+    "booster": {
+        "<%= CreatorName %>": "<%= CreatorVersion %>"
+    }
+}
