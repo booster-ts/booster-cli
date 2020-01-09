@@ -6,3 +6,4 @@ tslint.json
 docs/
 scripts/
 tests/
+Dockerfile
