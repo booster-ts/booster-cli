@@ -10,4 +10,4 @@ RUN npm link
 
 RUN mkdir -p testing
 
-CMD ["npm run test-func"]
+CMD ["npm run test:func"]

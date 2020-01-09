@@ -4,6 +4,9 @@ services:
   - docker
 
 node_js:
+  - '12'
+  - '10'
+  - '8'
   - node
 
 cache: npm
@@ -13,8 +16,10 @@ install:
 
 script:
   - npm run test:lint
-  - npm run test:docker
   - npm run build
+  - npm link
+  - mkdir -p testing
+  - npm run test:func -- --runInBand --testTimeout=10000
 
 jobs:
   include:
