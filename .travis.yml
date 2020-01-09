@@ -4,7 +4,7 @@ services:
   - docker
 
 node_js:
-  - '12'
+  - '10'
 
 cache: npm
 
@@ -18,7 +18,6 @@ script:
 
 jobs:
   include:
-
     - stage: npm beta release
       if: branch = master AND type != pull_request
       node_js: '10'
