@@ -36,7 +36,8 @@
         "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
         "curly": [true, "as-needed"],
         "ordered-imports": false,
-        "no-console": [false]
+        "no-console": [false],
+        "no-var-requires": false
     },
     "rulesDirectory": []
 }

@@ -1,51 +1,38 @@
-import { booster } from '@booster-ts/core';
-import { PathHandler } from '../PathHandler/PathHandler';
-import * as fs from 'fs';
-import { execSync, exec } from 'child_process';
-import { IPackage } from './IPackage';
+import env = require("yeoman-environment");
 
-@booster()
-export default class Creator {
+/**
+ * ICreatorOptions
+ * @description Options when creating a new Project
+ */
+export interface ICreatorOptions {
+    /** Project Name */
+    name: string;
+    /** Flags passed from CLI */
+    flags?: Array<string>;
+}
 
-    constructor(
-        private pathHandler: PathHandler
-    ) { }
+export class Creator {
 
-    public handler(projectName: string) {
-        const currentPath = this.pathHandler.getCurrentPath();
-        this.createFolder(projectName);
-        process.chdir(projectName);
-        execSync("git init");
-        execSync("npm init -y");
-        execSync("npm i @booster-ts/core --save");
-        execSync("npm i typescript --save");
-        this.createFolder("./src");
-        fs.copyFileSync(
-            `${this.pathHandler.getRootPath()}/ressources/tsconfig.json`, "./tsconfig.json"
-        );
-        fs.copyFileSync(`${this.pathHandler.getRootPath()}/ressources/app.ts`, "./src/app.ts");
-        fs.copyFileSync(
-            `${this.pathHandler.getRootPath()}/ressources/injector.ts`, "./src/injector.ts"
-        );
-        this.updatePackage();
-        process.chdir(currentPath);
+    private env: env;
+
+    constructor() {
+        this.env = env.createEnv();
     }
 
-    private updatePackage() {
-        const buffer = fs.readFileSync(`./package.json`).toString('utf-8');
-        const packageFile = JSON.parse(buffer) as IPackage;
-
-        packageFile.main = "./dist/app.js";
-        packageFile.homepage = "";
-        packageFile.scripts = {
-            start: "node ./dist/app.js",
-            build: "tsc"
-        };
-        fs.writeFileSync(`./package.json`, JSON.stringify(packageFile, null, 4));
-    }
-
-    private createFolder(folderName: string) {
-        if (!fs.existsSync(folderName))
-            fs.mkdirSync(folderName);
+    /**
+     * handler
+     * @description Handler to create new Project
+     * @param options Project Options
+     */
+    public async handler(options: ICreatorOptions): Promise<void> {
+        this.env.registerStub(require('./default-creator/default-creator'), 'default');
+        return new Promise((resolve, reject) => {
+            this.env.run('default', options, (err) => {
+                if (err)
+                    reject(err);
+                else
+                    resolve();
+            });
+        });
     }
 }

@@ -1,0 +1,9 @@
+src/
+.vscode/
+.travis.yml
+tsconfig.json
+tslint.json
+docs/
+scripts/
+tests/
+Dockerfile

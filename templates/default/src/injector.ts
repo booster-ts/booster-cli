@@ -2,8 +2,7 @@ import { Injector } from '@booster-ts/core';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const inject = new Injector();
-export default inject;
+export const inject = new Injector();
 
 /**
  * loadFiles
