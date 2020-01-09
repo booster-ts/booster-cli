@@ -54,4 +54,4 @@ const class = inject.inject(FileName);
 /** You Can now interact with the class */
 ```
 
-For more information you can view the documentation for @booster-ts/core
+For more information you can view the [Documentation](https://booster-ts.github.io/booster-cli/#/)
