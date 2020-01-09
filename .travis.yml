@@ -28,7 +28,7 @@ jobs:
       node_js: '10'
       script:
         - npm run build
-        - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+        - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
         - npm publish --tag beta
 
     - stage: npm release
@@ -37,5 +37,5 @@ jobs:
       node_js: '10'
       script:
         - npm run build
-        - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+        - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
         - node ./scripts/release.js
