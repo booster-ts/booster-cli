@@ -7,7 +7,7 @@
         "experimentalDecorators": true,
         "strict": false,
         "outDir": "dist",
-        "sourceMap": true,
+        "sourceMap": false,
         "types": [
             "jest",
             "node"
