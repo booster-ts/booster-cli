@@ -5,14 +5,16 @@
     "main": "dist/app.js",
     "scripts": {
         "build": "tsc",
-        "start": "node .",
+        "start": "node -r tsconfig-paths/register .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
         "@booster-ts/core": "^0.2.1",
+        "tsconfig-paths": "^3.9.0"
+    },
+    "devDependencies": {
         "typescript": "^3.7.3"
     },
-    "devDependencies": {},
     "keywords": [],
     "author": "Booster-TS",
     "booster": {

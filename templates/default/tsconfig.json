@@ -5,14 +5,18 @@
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "baseUrl": "src/",
+        "paths": {
+            "@injector": ["injector.ts"]
+        }
     },
     "include": [
-        "./src/"
+        "src/"
     ],
     "exclude": [
-        "./tests",
-        "./src/mocks",
+        "tests",
+        "src/mocks",
         "node_modules"
     ]
 }
