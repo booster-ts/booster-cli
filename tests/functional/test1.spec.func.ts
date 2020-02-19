@@ -84,6 +84,25 @@ describe("Functional Test 1", () => {
         });
     });
 
+    it("Should use correct template", (done) => {
+        execSync("mkdir -p .booster");
+        execSync("cp ../../.booster/class.ts .booster/action.ts");
+        execSync("cp ../../.booster/class.ts .booster/reaction.ts");
+        const config = {
+            root: './src',
+            reaction: 'reaction/'
+        };
+        fs.writeFileSync("./.booster/config.json", JSON.stringify(config));
+        const cmd = exec('boost g reaction name');
+        cmd.stderr.on('data', console.log);
+        cmd.stdout.on('data', console.log);
+        cmd.on('exit', (code) => {
+            expect(code).toBe(0);
+            expect(fs.existsSync("./src/reaction/name/name.ts")).toBeTruthy();
+            done();
+        });
+    });
+
     it("Should compile project", (done) => {
         jest.setTimeout(10000);
         const cmd = exec("npm run build");

@@ -64,11 +64,13 @@ export default class extends Generator {
             if (!fs.existsSync(currentPath))
                 continue;
             const templates = fs.readdirSync(currentPath);
-            for (const file of templates)
-                if (templateName.match((path.parse(file).name).toLocaleLowerCase())) {
+            for (const file of templates) {
+                const regex = new RegExp(`\b(${path.parse(file).name.toLocaleLowerCase()})\b`, 'i');
+                if (templateName.match(regex)) {
                     const templatePath = path.join(currentPath, `${file}`);
                     return templatePath;
                 }
+            }
         }
         throw new Error(`Template ${this.templateName} Not Found`);
     }
