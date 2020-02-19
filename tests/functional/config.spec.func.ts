@@ -43,6 +43,20 @@ describe("Config Test", () => {
         expect(fs.existsSync(`source/class/class1/class1.ts`));
     });
 
+    it("Should match correct template", () => {
+        const config = {
+            root: 'source/',
+            class: 'class/',
+            action: 'action/',
+            reaction: 'reaction/'
+        };
+        fs.writeFileSync(`.booster/config.json`, JSON.stringify(config));
+        execSync("cp ../../.booster/class.ts .booster/action.ts");
+        execSync("cp ../../.booster/class.ts .booster/reaction.ts");
+        const out = execSync("boost g reaction name").toString();
+        expect(fs.existsSync("./source/reaction/name/name.ts")).toBeTruthy();
+    });
+
     it("Should build", (done) => {
         jest.setTimeout(10000);
         const cmd = exec("npm run build");

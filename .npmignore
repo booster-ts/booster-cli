@@ -7,3 +7,4 @@ docs/
 scripts/
 tests/
 Dockerfile
+_config.yml
